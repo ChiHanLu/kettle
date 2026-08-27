@@ -1,11 +1,15 @@
 {
   "name": "claude-sounds",
-  "owner": { "name": "ChiHanLu", "url": "https://github.com/ChiHanLu" },
+  "owner": {
+    "name": "ChiHanLu",
+    "url": "https://github.com/ChiHanLu"
+  },
   "plugins": [
     {
       "name": "claude-sounds",
       "source": "./",
       "description": "Sound cues for Claude Code hook events. Cross-platform, per-event control, off by default."
     }
-  ]
+  ],
+  "description": "Sound cues for Claude Code — hear when it finishes, needs you, goes idle, or dies on an API error."
 }
