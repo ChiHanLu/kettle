@@ -9,6 +9,10 @@ say so.
 
 macOS · Windows · Linux. No dependencies — only what your OS already ships.
 
+![claude-sounds demo](assets/demo.gif)
+
+*The GIF is silent — [**watch it with sound**](assets/demo.mp4) (22s), which is rather the point.*
+
 ---
 
 ## Install

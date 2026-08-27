@@ -7,6 +7,10 @@
 
 macOS · Windows · Linux。零相依套件，只用作業系統本來就有的東西。
 
+![claude-sounds demo](assets/demo.gif)
+
+*GIF 沒有聲音 —— [**點這裡看有聲音的版本**](assets/demo.mp4)（22 秒），聲音才是重點。*
+
 ---
 
 ## 安裝
