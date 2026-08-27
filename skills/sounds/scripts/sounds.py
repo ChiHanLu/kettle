@@ -336,6 +336,15 @@ USAGE = """claude-sounds
 events: """ + "  ".join(EVENTS) + "\nsounds: " + "  ".join(ALIASES)
 
 
+def _pad(s, n):
+    """Left-align in a fixed *display* width - CJK glyphs occupy two columns."""
+    import unicodedata
+    w = lambda t: sum(2 if unicodedata.east_asian_width(c) in "WF" else 1 for c in t)
+    while w(s) > n:
+        s = s[:-2] + "…"
+    return s + " " * (n - w(s))
+
+
 def cmd_status(cfg):
     print("master   : %s" % ("ON" if cfg.get("enabled") else "OFF   (sounds on)"))
     print("volume   : %s" % cfg.get("volume"))
@@ -353,9 +362,7 @@ def cmd_status(cfg):
             bits = (bits + " " if bits else "") + 'say:"%s"' % ev["say"]
         if [s for s in (ev.get("sounds") or []) if not resolve(s)]:
             bits += " (!missing)"
-        if len(bits) > 26:
-            bits = bits[:23] + "..."
-        print("  %-8s %-5s %-26s %s" % (short, state, bits or "-", desc))
+        print("  %-8s %-5s %s %s" % (short, state, _pad(bits or "-", 26), desc))
     print("\n`sounds` with no args prints this. `sounds help` for commands.")
 
 
@@ -498,6 +505,10 @@ def selftest():
     assert not in_quiet("09:00-17:00", now=23 * 60)
     assert not in_quiet("09:00-17:00", now=17 * 60)  # end is exclusive
     assert not in_quiet(None) and not in_quiet("garbage")
+
+    assert _pad("abc", 6) == "abc   "
+    assert _pad("API 出錯了", 12) == "API 出錯了  "   # 3 CJK glyphs = 6 columns, not 3
+    assert _pad("x" * 40, 10).endswith("…") and len(_pad("x" * 40, 10)) == 10
 
     assert resolve("") is None
     assert resolve("definitely-not-a-real-sound-xyz") is None
