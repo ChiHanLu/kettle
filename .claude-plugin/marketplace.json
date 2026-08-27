@@ -1,0 +1,11 @@
+{
+  "name": "claude-sounds",
+  "owner": { "name": "ChiHanLu", "url": "https://github.com/ChiHanLu" },
+  "plugins": [
+    {
+      "name": "claude-sounds",
+      "source": "./",
+      "description": "Sound cues for Claude Code hook events. Cross-platform, per-event control, off by default."
+    }
+  ]
+}

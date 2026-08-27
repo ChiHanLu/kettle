@@ -1,0 +1,137 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"Stop\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"Stop\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"Notification:permission_prompt\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"Notification:permission_prompt\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"Notification:idle_prompt\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"Notification:idle_prompt\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"SubagentStop\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"SubagentStop\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"StopFailure\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"StopFailure\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"PostToolUseFailure\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"PostToolUseFailure\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PermissionDenied": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"PermissionDenied\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"PermissionDenied\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"PreCompact\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"PreCompact\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"SessionStart\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"SessionStart\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"SessionEnd\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"SessionEnd\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"TaskCompleted\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"TaskCompleted\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

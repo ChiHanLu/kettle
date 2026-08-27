@@ -1,0 +1,9 @@
+{
+  "name": "claude-sounds",
+  "displayName": "Claude Sounds",
+  "version": "1.0.0",
+  "description": "Play a sound (or speak) at Claude Code hook events - done, needs you, API died, subagent finished. Per-event on/off, volume, quiet hours, custom sounds. macOS / Windows / Linux.",
+  "author": { "name": "ChiHanLu", "url": "https://github.com/ChiHanLu" },
+  "keywords": ["sound", "audio", "notification", "hooks", "alert", "accessibility"],
+  "license": "MIT"
+}
