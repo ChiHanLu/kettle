@@ -47,15 +47,15 @@ ALIASES = {
     "ding":  {"darwin": ["Ping"],   "win32": ["Windows Ding", "ding", "chimes"],
               "linux": ["bell", "message", "complete"]},
     "soft":  {"darwin": ["Pop"],    "win32": ["Windows Balloon", "Speech On", "ding"],
-              "linux": ["message", "bell"]},
+              "linux": ["audio-volume-change", "device-added", "message", "bell"]},
     "up":    {"darwin": ["Blow"],   "win32": ["Windows Notify", "Windows Notify System Generic", "chimes"],
-              "linux": ["dialog-information", "message", "bell"]},
+              "linux": ["dialog-information", "service-login", "message", "bell"]},
     "alert": {"darwin": ["Funk"],   "win32": ["Windows Notify System Generic", "Windows Notify", "notify"],
-              "linux": ["message", "dialog-information", "bell"]},
+              "linux": ["message-new-instant", "message", "dialog-information", "bell"]},
     "boom":  {"darwin": ["Basso"],  "win32": ["Windows Critical Stop", "chord", "Windows Foreground"],
-              "linux": ["dialog-warning", "dialog-error", "bell"]},
+              "linux": ["dialog-warning", "suspend-error", "dialog-error", "bell"]},
     "hmm":   {"darwin": ["Purr"],   "win32": ["Windows Background", "Windows Balloon", "ding"],
-              "linux": ["dialog-question", "message", "bell"]},
+              "linux": ["window-question", "window-attention", "message", "bell"]},
     "down":  {"darwin": ["Sosumi"], "win32": ["Windows Exclamation", "Windows Error", "chord"],
               "linux": ["dialog-error", "dialog-warning", "bell"]},
 }
@@ -497,6 +497,15 @@ def selftest():
     for name, per_plat in ALIASES.items():
         for plat in ("darwin", "win32", "linux"):
             assert per_plat.get(plat), "alias %s missing %s" % (name, plat)
+    # Two aliases resolving to the same file makes two events indistinguishable -
+    # freedesktop has no dialog-question, so alert/soft/hmm silently collided on Linux.
+    for plat in ("darwin", "win32", "linux"):
+        first = [ALIASES[a][plat][0] for a in ALIASES]
+        assert len(set(first)) == len(first), "%s aliases collide: %s" % (plat, first)
+    # Everything an alias claims must exist on the platform we're running on.
+    for name in ALIASES:
+        assert resolve(name), "alias %r resolves to nothing on %s" % (name, PLAT)
+    assert len({resolve(a) for a in ALIASES}) == len(ALIASES), "aliases resolve to the same file"
 
     assert in_quiet("22:00-09:00", now=23 * 60)      # inside, past midnight wrap
     assert in_quiet("22:00-09:00", now=2 * 60)       # inside, after midnight

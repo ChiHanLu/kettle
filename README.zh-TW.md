@@ -107,11 +107,11 @@ sounds preset off           所有事件全關
 |---|---|---|---|
 | `done` | Glass | chimes | complete |
 | `ding` | Ping | Windows Ding | bell |
-| `soft` | Pop | Windows Balloon | message |
+| `soft` | Pop | Windows Balloon | audio-volume-change |
 | `up` | Blow | Windows Notify | dialog-information |
-| `alert` | Funk | Windows Notify System Generic | message |
+| `alert` | Funk | Windows Notify System Generic | message-new-instant |
 | `boom` | Basso | Windows Critical Stop | dialog-warning |
-| `hmm` | Purr | Windows Background | dialog-question |
+| `hmm` | Purr | Windows Background | window-question |
 | `down` | Sosumi | Windows Exclamation | dialog-error |
 
 每個別名在各平台都準備了好幾個備援檔名，所以某個 Windows 版本少了某個檔也不會變成無聲。

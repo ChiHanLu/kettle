@@ -109,11 +109,11 @@ Eight portable aliases, so the same config works on any machine:
 |---|---|---|---|
 | `done` | Glass | chimes | complete |
 | `ding` | Ping | Windows Ding | bell |
-| `soft` | Pop | Windows Balloon | message |
+| `soft` | Pop | Windows Balloon | audio-volume-change |
 | `up` | Blow | Windows Notify | dialog-information |
-| `alert` | Funk | Windows Notify System Generic | message |
+| `alert` | Funk | Windows Notify System Generic | message-new-instant |
 | `boom` | Basso | Windows Critical Stop | dialog-warning |
-| `hmm` | Purr | Windows Background | dialog-question |
+| `hmm` | Purr | Windows Background | window-question |
 | `down` | Sosumi | Windows Exclamation | dialog-error |
 
 Each alias has several fallbacks per platform, so a missing file on one Windows build
