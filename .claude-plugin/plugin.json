@@ -1,9 +1,11 @@
 {
-  "name": "claude-sounds",
-  "displayName": "Claude Sounds",
-  "version": "1.1.0",
-  "description": "Play a sound (or speak) at Claude Code hook events - done, needs you, API died, subagent finished. Per-event on/off, volume, quiet hours, custom sounds. macOS / Windows / Linux.",
+  "name": "kettle",
+  "displayName": "kettle",
+  "version": "2.0.0",
+  "description": "Put the kettle on and walk away. Claude Code makes a sound when it finishes, when it needs your permission, when it's been waiting on you — and when the turn died on an API error, which looks exactly like still working. 11 hook events, each independently switchable. macOS/Windows/Linux, zero dependencies.",
   "author": { "name": "ChiHanLu", "url": "https://github.com/ChiHanLu" },
-  "keywords": ["sound", "audio", "notification", "hooks", "alert", "accessibility"],
+  "homepage": "https://github.com/ChiHanLu/kettle",
+  "repository": "https://github.com/ChiHanLu/kettle",
+  "keywords": ["sound", "audio", "notification", "hooks", "alert", "rate-limit", "accessibility"],
   "license": "MIT"
 }

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""claude-sounds - play a sound at Claude Code hook events. macOS / Windows / Linux.
+"""kettle - Claude Code makes a sound when it needs you. macOS / Windows / Linux.
 
-Config:  ~/.claude/sounds.json
-Sounds:  ~/.claude/sounds/   (drop your own .wav/.mp3/.aiff/.oga/.m4a here)
+Config:  ~/.claude/kettle/config.json
+Sounds:  ~/.claude/kettle/sounds/   (drop your own .wav/.mp3/.aiff/.oga/.m4a here)
 
-Hooks call `sounds.py hook <EventKey>`. Everything else is the user-facing CLI.
+Hooks call `kettle.py hook <EventKey>`. Everything else is the user-facing CLI.
 """
 
 import json
@@ -17,8 +17,9 @@ import time
 from pathlib import Path
 
 HOME = Path.home()
-CONFIG = Path(os.environ.get("CLAUDE_SOUNDS_CONFIG", HOME / ".claude" / "sounds.json"))
-USER_SOUNDS = Path(os.environ.get("CLAUDE_SOUNDS_DIR", HOME / ".claude" / "sounds"))
+KETTLE_HOME = HOME / ".claude" / "kettle"
+CONFIG = Path(os.environ.get("KETTLE_CONFIG", KETTLE_HOME / "config.json"))
+USER_SOUNDS = Path(os.environ.get("KETTLE_SOUNDS_DIR", KETTLE_HOME / "sounds"))
 
 if sys.platform.startswith("win"):
     PLAT = "win32"
@@ -76,7 +77,7 @@ EVENTS = {
 }
 KEY_TO_SHORT = {v[0]: k for k, v in EVENTS.items()}
 
-# The recommended set: on when you run `sounds preset`. Everything else is off.
+# The recommended set: on when you run `kettle preset`. Everything else is off.
 RECOMMENDED = {"Stop", "Notification:permission_prompt", "Notification:idle_prompt",
                "SubagentStop", "StopFailure"}
 
@@ -147,7 +148,7 @@ def resolve(name):
 
 
 def available():
-    """(aliases_that_resolve, {dir: [stems]}) for `sounds list`."""
+    """(aliases_that_resolve, {dir: [stems]}) for `kettle list`."""
     aliases = [a for a in ALIASES if resolve(a)]
     found = {}
     for d in [USER_SOUNDS, *SYSTEM_DIRS]:
@@ -280,9 +281,9 @@ def fire(cfg, key, force=False):
         return "no such event: %s" % key
     if not force:
         if not cfg.get("enabled"):
-            return "muted (sounds on)"
+            return "muted (kettle on)"
         if ev.get("enabled", True) is False:
-            return "event off (sounds on %s)" % KEY_TO_SHORT.get(key, key)
+            return "event off (kettle on %s)" % KEY_TO_SHORT.get(key, key)
         if in_quiet(cfg.get("quiet_hours")):
             return "quiet hours %s" % cfg["quiet_hours"]
         if cfg.get("only_when_unfocused") and terminal_focused():
@@ -293,7 +294,7 @@ def fire(cfg, key, force=False):
     ok = play(random.choice(pool), vol) if pool else False
     if ev.get("say"):
         ok = speak(ev["say"]) or ok
-    return None if ok else "nothing playable (sounds list)"
+    return None if ok else "nothing playable (kettle list)"
 
 
 # ---------------------------------------------------------------- CLI helpers
@@ -315,23 +316,23 @@ def die(msg, code=1):
 
 # ---------------------------------------------------------------- commands
 
-USAGE = """claude-sounds
+USAGE = """kettle - Claude Code makes a sound when it needs you
 
-  sounds                     show everything
-  sounds on | off            master switch
-  sounds on stop | off stop  one event
+  kettle                     show everything
+  kettle on | off            master switch
+  kettle on stop | off stop  one event
 
-  sounds stop done           set a sound
-  sounds stop done,up        comma = random pool
-  sounds stop say:all done   say: prefix speaks instead
-  sounds stop ~/my/ding.mp3  any file path
+  kettle stop done           set a sound
+  kettle stop done,up        comma = random pool
+  kettle stop say:all done   say: prefix speaks instead
+  kettle stop ~/my/ding.mp3  any file path
 
-  sounds test [event]        play it for real, all rules applied
-  sounds list                every sound you can name
-  sounds volume 0.3 [event]
-  sounds quiet 22:00-09:00 | sounds quiet off
-  sounds focus on | off      only sound when the terminal isn't in front
-  sounds preset | preset off recommended set / all events off
+  kettle test [event]        play it for real, all rules applied
+  kettle list                every sound you can name
+  kettle volume 0.3 [event]
+  kettle quiet 22:00-09:00 | kettle quiet off
+  kettle focus on | off      only sound when the terminal isn't in front
+  kettle preset | preset off recommended set / all events off
 
 events: """ + "  ".join(EVENTS) + "\nsounds: " + "  ".join(ALIASES)
 
@@ -346,7 +347,7 @@ def _pad(s, n):
 
 
 def cmd_status(cfg):
-    print("master   : %s" % ("ON" if cfg.get("enabled") else "OFF   (sounds on)"))
+    print("master   : %s" % ("ON" if cfg.get("enabled") else "OFF   (kettle on)"))
     print("volume   : %s" % cfg.get("volume"))
     print("quiet    : %s" % (cfg.get("quiet_hours") or "-"))
     print("focus    : %s" % ("only when terminal is not in front"
@@ -363,7 +364,7 @@ def cmd_status(cfg):
         if [s for s in (ev.get("sounds") or []) if not resolve(s)]:
             bits += " (!missing)"
         print("  %-8s %-5s %s %s" % (short, state, _pad(bits or "-", 26), desc))
-    print("\n`sounds` with no args prints this. `sounds help` for commands.")
+    print("\n`kettle` with no args prints this. `kettle help` for commands.")
 
 
 def cmd_toggle(cfg, on, rest):
@@ -373,11 +374,11 @@ def cmd_toggle(cfg, on, rest):
         save(cfg)
         print("%s: %s" % (KEY_TO_SHORT[key], "on" if on else "off"))
         if on and not cfg.get("enabled"):
-            print("note: master switch is still off - run `sounds on`")
+            print("note: master switch is still off - run `kettle on`")
     else:
         cfg["enabled"] = on
         save(cfg)
-        print("sounds %s" % ("on" if on else "off"))
+        print("kettle %s" % ("on" if on else "off"))
 
 
 def cmd_set(cfg, key, spec):
@@ -437,7 +438,7 @@ def cmd_list():
 
 def cmd_volume(cfg, rest):
     if not rest:
-        die("usage: sounds volume 0.3 [event]")
+        die("usage: kettle volume 0.3 [event]")
     try:
         v = max(0.0, min(1.0, float(rest[0])))
     except ValueError:
@@ -454,7 +455,7 @@ def cmd_volume(cfg, rest):
 
 def cmd_quiet(cfg, rest):
     if not rest:
-        die("usage: sounds quiet 22:00-09:00 | sounds quiet off")
+        die("usage: kettle quiet 22:00-09:00 | kettle quiet off")
     if rest[0].lower() == "off":
         cfg["quiet_hours"] = None
     else:
@@ -471,7 +472,7 @@ def cmd_quiet(cfg, rest):
 
 def cmd_focus(cfg, rest):
     if not rest or rest[0].lower() not in ("on", "off"):
-        die("usage: sounds focus on | off")
+        die("usage: kettle focus on | off")
     want = rest[0].lower() == "on"
     if want and PLAT != "darwin":
         die("focus detection is macOS-only right now - not enabling it on %s" % PLAT)
@@ -488,7 +489,7 @@ def cmd_preset(cfg, rest):
     print("preset: %s" % ("all events off" if off
                           else " ".join(sorted(KEY_TO_SHORT[k] for k in RECOMMENDED))))
     if not off and not cfg.get("enabled"):
-        print("note: master switch is still off - run `sounds on`")
+        print("note: master switch is still off - run `kettle on`")
 
 
 # ---------------------------------------------------------------- selftest
@@ -542,7 +543,7 @@ def selftest():
     assert not (set(EVENTS) & set(ALIASES)), "event and sound names must not collide"
 
     off = json.loads(json.dumps(DEFAULTS))
-    assert fire(off, "Stop") == "muted (sounds on)"
+    assert fire(off, "Stop") == "muted (kettle on)"
     off["enabled"] = True
     assert fire(off, "PreCompact").startswith("event off")
     off["quiet_hours"] = "00:00-23:59"
@@ -614,7 +615,7 @@ def main():
         cmd_status(cfg)
     elif event_key(head):
         if not rest:
-            die("usage: sounds %s <sound[,sound]> | say:text | off" % head)
+            die("usage: kettle %s <sound[,sound]> | say:text | off" % head)
         cmd_set(cfg, event_key(head), " ".join(rest))
     else:
         print("unknown: %s\n" % argv[0])

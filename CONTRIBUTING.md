@@ -10,7 +10,7 @@ rejected, including from the maintainer. Fork, branch, PR.
 ### Before you open a PR
 
 ```bash
-python3 skills/sounds/scripts/sounds.py --selftest
+python3 skills/kettle/scripts/kettle.py --selftest
 ```
 
 That's the whole test suite and it must pass. There is no framework and none is wanted —
@@ -20,7 +20,7 @@ Then sanity-check the hot path, because hooks like `Stop` block a Claude turn un
 command returns:
 
 ```bash
-time python3 skills/sounds/scripts/sounds.py hook Stop   # must stay well under 200ms
+time python3 skills/kettle/scripts/kettle.py hook Stop   # must stay well under 200ms
 ```
 
 ### What gets merged easily
@@ -42,7 +42,7 @@ time python3 skills/sounds/scripts/sounds.py hook Stop   # must stay well under 
 
 ### House rules
 
-- One script, `skills/sounds/scripts/sounds.py`. Resist splitting it up.
+- One script, `skills/kettle/scripts/kettle.py`. Resist splitting it up.
 - Playback is always detached (`Popen`, never `wait()`). A hook that waits on audio
   stalls every single Claude reply.
 - A missing sound file is silence, never an error message — hook stderr pollutes the
@@ -59,7 +59,7 @@ time python3 skills/sounds/scripts/sounds.py hook Stop   # must stay well under 
 ### 送 PR 之前
 
 ```bash
-python3 skills/sounds/scripts/sounds.py --selftest
+python3 skills/kettle/scripts/kettle.py --selftest
 ```
 
 這就是全部的測試，一定要過。沒有測試框架，也不打算加 —— 如果你加了不平凡的邏輯，
@@ -68,7 +68,7 @@ python3 skills/sounds/scripts/sounds.py --selftest
 然後量一下熱路徑，因為 `Stop` 這類 hook 會**卡住** Claude 那一輪直到指令回傳：
 
 ```bash
-time python3 skills/sounds/scripts/sounds.py hook Stop   # 必須遠低於 200 毫秒
+time python3 skills/kettle/scripts/kettle.py hook Stop   # 必須遠低於 200 毫秒
 ```
 
 ### 什麼樣的 PR 會很快被合併
@@ -89,7 +89,7 @@ time python3 skills/sounds/scripts/sounds.py hook Stop   # 必須遠低於 200 �
 
 ### 規矩
 
-- 就一支腳本 `skills/sounds/scripts/sounds.py`，不要拆。
+- 就一支腳本 `skills/kettle/scripts/kettle.py`，不要拆。
 - 播放一律 detach（`Popen`，永遠不要 `wait()`）。在 hook 裡等音效播完，
   Claude 每回一句話都會卡住。
 - 找不到音效檔就是靜音，不要噴錯誤訊息 —— hook 的 stderr 會污染 transcript。
@@ -104,7 +104,7 @@ time python3 skills/sounds/scripts/sounds.py hook Stop   # 必須遠低於 200 �
 ### 提 PR 之前
 
 ```bash
-python3 skills/sounds/scripts/sounds.py --selftest
+python3 skills/kettle/scripts/kettle.py --selftest
 ```
 
 这就是全部的测试，必须通过。没有测试框架，也不打算加 —— 如果你加了不平凡的逻辑，
@@ -113,7 +113,7 @@ python3 skills/sounds/scripts/sounds.py --selftest
 然后量一下热路径，因为 `Stop` 这类 hook 会**阻塞** Claude 那一轮直到命令返回：
 
 ```bash
-time python3 skills/sounds/scripts/sounds.py hook Stop   # 必须远低于 200 毫秒
+time python3 skills/kettle/scripts/kettle.py hook Stop   # 必须远低于 200 毫秒
 ```
 
 ### 什么样的 PR 会很快被合并
@@ -134,7 +134,7 @@ time python3 skills/sounds/scripts/sounds.py hook Stop   # 必须远低于 200 �
 
 ### 规矩
 
-- 就一个脚本 `skills/sounds/scripts/sounds.py`，不要拆。
+- 就一个脚本 `skills/kettle/scripts/kettle.py`，不要拆。
 - 播放一律 detach（`Popen`，永远不要 `wait()`）。在 hook 里等音频播完，
   Claude 每回一句话都会卡住。
 - 找不到声音文件就是静音，不要抛错误信息 —— hook 的 stderr 会污染 transcript。

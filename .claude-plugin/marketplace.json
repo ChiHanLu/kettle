@@ -1,15 +1,14 @@
 {
-  "name": "claude-sounds",
-  "owner": {
-    "name": "ChiHanLu",
-    "url": "https://github.com/ChiHanLu"
+  "name": "kettle",
+  "owner": { "name": "ChiHanLu", "url": "https://github.com/ChiHanLu" },
+  "metadata": {
+    "description": "Put the kettle on and walk away — Claude Code tells you when it's ready, or when it boiled dry."
   },
   "plugins": [
     {
-      "name": "claude-sounds",
+      "name": "kettle",
       "source": "./",
-      "description": "Sound cues for Claude Code hook events. Cross-platform, per-event control, off by default."
+      "description": "Sound cues for Claude Code hook events. Ten other plugins tell you it finished; this one also tells you when it died. Cross-platform, zero dependencies, off by default."
     }
-  ],
-  "description": "Sound cues for Claude Code — hear when it finishes, needs you, goes idle, or dies on an API error."
+  ]
 }

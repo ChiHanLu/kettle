@@ -1,13 +1,19 @@
-# claude-sounds
+# kettle
 
 [English](README.md) · **繁體中文** · [简体中文](README.zh-CN.md)
 
-在值得你注意的時刻，Claude Code 會出聲 —— 講完了、要跟你要權限、等你太久、
-或者被 API 限流整輪直接掛掉。每個事件都能獨立開關。裝好之後預設全靜音，你不開它就不吵。
+**把水壺放上去，然後走開。** Claude Code 會在講完的時候、要跟你要權限的時候、
+等你太久的時候出聲 —— 以及**這一輪被 API 打死**的時候。從房間另一頭看過去，
+死掉的終端機跟還在跑長得一模一樣。
+
+最後那個才是這個 plugin 存在的理由。其他的通知 plugin 都只告訴你「做完了」，
+沒有一個會告訴你「它沒做完」。
+
+11 個 hook 事件，每個都能單獨開關。你不開它就不出聲。
 
 macOS · Windows · Linux。零相依套件，只用作業系統本來就有的東西。
 
-![claude-sounds demo](assets/demo.gif)
+![kettle demo](assets/demo.gif)
 
 *GIF 沒有聲音 —— [**點這裡看有聲音的版本**](assets/demo.mp4)（22 秒），聲音才是重點。*
 
@@ -16,16 +22,16 @@ macOS · Windows · Linux。零相依套件，只用作業系統本來就有的�
 ## 安裝
 
 ```bash
-claude plugin marketplace add https://github.com/ChiHanLu/claude-sounds
-claude plugin install claude-sounds@claude-sounds --scope user
+claude plugin marketplace add https://github.com/ChiHanLu/kettle
+claude plugin install kettle@kettle --scope user
 ```
 
 或先 clone 下來裝本機版：
 
 ```bash
-git clone https://github.com/ChiHanLu/claude-sounds
-claude plugin marketplace add ./claude-sounds
-claude plugin install claude-sounds@claude-sounds --scope user
+git clone https://github.com/ChiHanLu/kettle
+claude plugin marketplace add ./kettle
+claude plugin install kettle@kettle --scope user
 ```
 
 重開 Claude Code。**它是故意裝成靜音的** —— 總開關預設為關。
@@ -34,13 +40,13 @@ claude plugin install claude-sounds@claude-sounds --scope user
 
 ## 30 秒上手
 
-在 Claude Code 裡面，全部都是 `/sounds`：
+在 Claude Code 裡面，全部都是 `/kettle`：
 
 ```
-/sounds on            打開（建議組：講完、要權限、閒置、子 agent、出錯）
-/sounds               看現在誰對到誰
-/sounds test          馬上全部聽一遍
-/sounds off           全部安靜
+/kettle on            打開（建議組：講完、要權限、閒置、子 agent、出錯）
+/kettle               看現在誰對到誰
+/kettle test          馬上全部聽一遍
+/kettle off           全部安靜
 ```
 
 你也可以直接用講的：「完成音小聲一點」、「晚上十點以後不要吵」、
@@ -49,7 +55,7 @@ claude plugin install claude-sounds@claude-sounds --scope user
 也可以完全不透過 Claude，直接在終端機跑：
 
 ```bash
-python3 ~/.claude/plugins/cache/claude-sounds/claude-sounds/*/skills/sounds/scripts/sounds.py
+python3 ~/.claude/plugins/cache/kettle/kettle/*/skills/kettle/scripts/kettle.py
 ```
 
 ---
@@ -57,27 +63,27 @@ python3 ~/.claude/plugins/cache/claude-sounds/claude-sounds/*/skills/sounds/scri
 ## 指令
 
 ```
-sounds                      全貌：總開關、音量、靜音時段、每個事件的狀態
-sounds on | off             總開關
-sounds on stop | off stop   只開/關單一事件
+kettle                      全貌：總開關、音量、靜音時段、每個事件的狀態
+kettle on | off             總開關
+kettle on stop | off stop   只開/關單一事件
 
-sounds stop done            設定音效
-sounds stop done,up         逗號 = 每次隨機挑一個
-sounds stop 說:好了          用講的取代音效（say: / 說: / 说: 都認）
-sounds stop ~/x/ding.mp3    直接指檔案路徑
-sounds stop off             等同 `sounds off stop`
+kettle stop done            設定音效
+kettle stop done,up         逗號 = 每次隨機挑一個
+kettle stop 說:好了          用講的取代音效（say: / 說: / 说: 都認）
+kettle stop ~/x/ding.mp3    直接指檔案路徑
+kettle stop off             等同 `kettle off stop`
 
-sounds test [event]         照現在的設定實際播一次（所有規則照跑）
-sounds list                 這台機器上所有叫得出名字的音效
-sounds volume 0.3 [event]   全域音量，或只調某一個事件
-sounds quiet 22:00-09:00    靜音時段（跨半夜也算得對）
-sounds quiet off
-sounds focus on | off       終端機在最前面時就閉嘴
-sounds preset               回到建議組
-sounds preset off           所有事件全關
+kettle test [event]         照現在的設定實際播一次（所有規則照跑）
+kettle list                 這台機器上所有叫得出名字的音效
+kettle volume 0.3 [event]   全域音量，或只調某一個事件
+kettle quiet 22:00-09:00    靜音時段（跨半夜也算得對）
+kettle quiet off
+kettle focus on | off       終端機在最前面時就閉嘴
+kettle preset               回到建議組
+kettle preset off           所有事件全關
 ```
 
-**沒有 `set` 這個字**。`sounds <事件> <音效>` 本身就是設定。
+**沒有 `set` 這個字**。`kettle <事件> <音效>` 本身就是設定。
 事件名稱和音效名稱是兩組完全不重疊的命名空間，所以永遠不會搞混。
 
 ---
@@ -120,27 +126,27 @@ sounds preset off           所有事件全關
 
 每個別名在各平台都準備了好幾個備援檔名，所以某個 Windows 版本少了某個檔也不會變成無聲。
 
-當然也可以直接指定系統音效原名 —— `sounds stop Glass`、`sounds stop tada`。
-`sounds list` 會列出全部可用的。
+當然也可以直接指定系統音效原名 —— `kettle stop Glass`、`kettle stop tada`。
+`kettle list` 會列出全部可用的。
 
 ### 加入自己的音效
 
-把檔案丟進 `~/.claude/sounds/` 就好，支援 `.wav` `.mp3` `.aiff` `.oga` `.m4a` `.flac`。
+把檔案丟進 `~/.claude/kettle/sounds/` 就好，支援 `.wav` `.mp3` `.aiff` `.oga` `.m4a` `.flac`。
 
 ```bash
-cp ~/Downloads/tada.mp3 ~/.claude/sounds/
-sounds list          # tada 出現了
-sounds stop tada
-sounds test stop
+cp ~/Downloads/tada.mp3 ~/.claude/kettle/sounds/
+kettle list          # tada 出現了
+kettle stop tada
+kettle test stop
 ```
 
-也可以直接給絕對路徑：`sounds stop ~/Music/whatever.wav`。
+也可以直接給絕對路徑：`kettle stop ~/Music/whatever.wav`。
 
 ---
 
 ## 設定檔
 
-`~/.claude/sounds.json`。放在 plugin 外面，所以更新 plugin 不會被洗掉。
+`~/.claude/kettle/config.json`。放在 plugin 外面，所以更新 plugin 不會被洗掉。
 **建議一律用 CLI 改**（它會驗證名稱並告訴你哪個找不到），格式長這樣：
 
 ```json
@@ -160,9 +166,9 @@ sounds test stop
 ```
 
 - 頂層 `enabled: false` 一律靜音，蓋過所有事件層設定
-- `sounds` 有兩個以上 → 每次隨機挑一個
+- `kettle` 有兩個以上 → 每次隨機挑一個
 - 事件層的 `volume` 蓋掉全域音量
-- `say` 和 `sounds` 可以並存，也可以只留 `say`
+- `say` 和 `kettle` 可以並存，也可以只留 `say`
 
 ---
 
@@ -175,15 +181,15 @@ sounds test stop
 | **Linux** | 依序找 `paplay` / `pw-play` / `ffplay` / `mpv` / `aplay` / `play` | `spd-say` 或 `espeak` | 除 `aplay` 外都支援 |
 
 **`focus` 只有 macOS 能用。** Windows 要寫 P/Invoke、Wayland 根本沒有取得前景視窗的 API，
-所以在這兩個平台上 `sounds focus on` 會直接拒絕你，而不是假裝有效然後默默沒作用。
+所以在這兩個平台上 `kettle focus on` 會直接拒絕你，而不是假裝有效然後默默沒作用。
 
 ---
 
 ## 疑難排解
 
-**完全沒聲音。** 照順序查：`sounds`（總開關 ON 嗎？那個事件是 `on` 嗎？）→
-SOUND 欄位有沒有標 `(!missing)`？→ `sounds test stop` 會直接印出它為什麼沒響 →
-`sounds list` 看這台機器實際找得到哪些音效。
+**完全沒聲音。** 照順序查：`kettle`（總開關 ON 嗎？那個事件是 `on` 嗎？）→
+SOUND 欄位有沒有標 `(!missing)`？→ `kettle test stop` 會直接印出它為什麼沒響 →
+`kettle list` 看這台機器實際找得到哪些音效。
 
 **同一個聲音響兩次。** 你的 `~/.claude/settings.json` 裡還留著手寫的
 `afplay` / `powershell` hook。plugin hooks 跟你的設定是**合併**不是取代，
@@ -193,19 +199,19 @@ SOUND 欄位有沒有標 `(!missing)`？→ `sounds test stop` 會直接印出�
 （`sudo apt install pulseaudio-utils`）。要語音的話 `sudo apt install speech-dispatcher`。
 
 **Windows 沒聲音。** 確認 PowerShell 叫得到，以及 `C:\Windows\Media\chimes.wav` 存在；
-有些 Server 版本根本沒附音效檔，這種情況就自己丟檔案進 `~/.claude/sounds/`。
+有些 Server 版本根本沒附音效檔，這種情況就自己丟檔案進 `~/.claude/kettle/sounds/`。
 
 **裝完之後整個變慢。** 不應該發生：播放是 detach 出去的，hook 約 30 毫秒就回傳。
-用 `time python3 .../sounds.py hook Stop` 量一下，超過 200 毫秒請開 issue。
+用 `time python3 .../kettle.py hook Stop` 量一下，超過 200 毫秒請開 issue。
 
 ---
 
 ## 運作方式
 
-就一支 Python 腳本。Claude Code 的 hook 會呼叫 `sounds.py hook <Event>`，
+就一支 Python 腳本。Claude Code 的 hook 會呼叫 `kettle.py hook <Event>`，
 它讀設定檔、把系統播放器**丟到背景**、然後立刻結束 —— 因為 `Stop` 和 `SubagentStop`
 是阻塞式 hook，會等指令回傳才繼續，如果在這裡等音效播完，Claude 每回一句話都會卡住。
 
-自我檢查：`python3 skills/sounds/scripts/sounds.py --selftest`
+自我檢查：`python3 skills/kettle/scripts/kettle.py --selftest`
 
 MIT 授權。

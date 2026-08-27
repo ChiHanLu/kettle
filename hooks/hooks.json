@@ -5,8 +5,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"Stop\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"Stop\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"Stop\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"Stop\"",
             "timeout": 5
           }
         ]
@@ -18,8 +18,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"Notification:permission_prompt\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"Notification:permission_prompt\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"Notification:permission_prompt\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"Notification:permission_prompt\"",
             "timeout": 5
           }
         ]
@@ -29,8 +29,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"Notification:idle_prompt\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"Notification:idle_prompt\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"Notification:idle_prompt\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"Notification:idle_prompt\"",
             "timeout": 5
           }
         ]
@@ -41,8 +41,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"SubagentStop\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"SubagentStop\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"SubagentStop\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"SubagentStop\"",
             "timeout": 5
           }
         ]
@@ -53,8 +53,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"StopFailure\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"StopFailure\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"StopFailure\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"StopFailure\"",
             "timeout": 5
           }
         ]
@@ -65,8 +65,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"PostToolUseFailure\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"PostToolUseFailure\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"PostToolUseFailure\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"PostToolUseFailure\"",
             "timeout": 5
           }
         ]
@@ -77,8 +77,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"PermissionDenied\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"PermissionDenied\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"PermissionDenied\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"PermissionDenied\"",
             "timeout": 5
           }
         ]
@@ -89,8 +89,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"PreCompact\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"PreCompact\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"PreCompact\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"PreCompact\"",
             "timeout": 5
           }
         ]
@@ -102,8 +102,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"SessionStart\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"SessionStart\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"SessionStart\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"SessionStart\"",
             "timeout": 5
           }
         ]
@@ -114,8 +114,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"SessionEnd\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"SessionEnd\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"SessionEnd\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"SessionEnd\"",
             "timeout": 5
           }
         ]
@@ -126,8 +126,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/sounds/scripts/sounds.py\" hook \"TaskCompleted\"; exit 0",
-            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\sounds\\scripts\\sounds.py\" hook \"TaskCompleted\"",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/kettle/scripts/kettle.py\" hook \"TaskCompleted\"; exit 0",
+            "commandWindows": "python \"$env:CLAUDE_PLUGIN_ROOT\\skills\\kettle\\scripts\\kettle.py\" hook \"TaskCompleted\"",
             "timeout": 5
           }
         ]

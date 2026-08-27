@@ -155,7 +155,7 @@ const Title: React.FC = () => {
       style={{ justifyContent: "center", alignItems: "center", opacity: out }}
     >
       <div style={{ fontSize: 96, opacity: s, transform: `scale(${0.9 + s * 0.1})` }}>
-        🔊
+        🫖
       </div>
       <div
         style={{
@@ -168,7 +168,7 @@ const Title: React.FC = () => {
           transform: `translateY(${(1 - s) * 20}px)`,
         }}
       >
-        claude-sounds
+        kettle
       </div>
       <div
         style={{
@@ -179,7 +179,7 @@ const Title: React.FC = () => {
           opacity: interpolate(f, [16, 32], [0, 1], { extrapolateRight: "clamp" }),
         }}
       >
-        stop watching the terminal.
+        put it on. walk away.
       </div>
     </AbsoluteFill>
   );
@@ -335,7 +335,7 @@ const SceneCli: React.FC = () => {
     <AbsoluteFill style={{ opacity: useFade(0, 8) }}>
       <Term>
         <div style={{ color: DIM }}>
-          <span style={{ color: GREEN }}>&gt;</span> <Typed text="/sounds" start={2} cps={12} />
+          <span style={{ color: GREEN }}>&gt;</span> <Typed text="/kettle" start={2} cps={12} />
         </div>
         <div style={{ marginTop: 16, color: DIM, fontSize: 21 }}>
           EVENT&nbsp;&nbsp;&nbsp; STATE&nbsp; SOUND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FIRES WHEN
@@ -353,7 +353,7 @@ const SceneCli: React.FC = () => {
         {f >= 62 ? (
           <div style={{ marginTop: 18, color: FG }}>
             <span style={{ color: GREEN }}>&gt;</span>{" "}
-            <Typed text="/sounds stop done,up" start={62} cps={14} />
+            <Typed text="/kettle stop done,up" start={62} cps={14} />
           </div>
         ) : null}
       </Term>
@@ -384,8 +384,8 @@ const Outro: React.FC = () => {
           transform: `translateY(${(1 - s) * 16}px)`,
         }}
       >
-        <div>claude plugin marketplace add ChiHanLu/claude-sounds</div>
-        <div style={{ marginTop: 8 }}>claude plugin install claude-sounds@claude-sounds</div>
+        <div>claude plugin marketplace add ChiHanLu/kettle</div>
+        <div style={{ marginTop: 8 }}>claude plugin install kettle@kettle</div>
       </div>
       <div
         style={{
@@ -407,7 +407,7 @@ const Outro: React.FC = () => {
           opacity: interpolate(f, [20, 36], [0, 1], { extrapolateRight: "clamp" }),
         }}
       >
-        github.com/ChiHanLu/claude-sounds
+        github.com/ChiHanLu/kettle
       </div>
     </AbsoluteFill>
   );
