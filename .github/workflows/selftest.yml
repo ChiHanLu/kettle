@@ -1,0 +1,54 @@
+name: selftest
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  selftest:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: selftest
+        run: python skills/sounds/scripts/sounds.py --selftest
+
+      - name: CLI smoke test
+        shell: bash
+        env:
+          CLAUDE_SOUNDS_CONFIG: ${{ runner.temp }}/sounds.json
+        run: |
+          S="python skills/sounds/scripts/sounds.py"
+          $S                      # fresh install must render, master OFF
+          $S on
+          $S stop done,up
+          $S error say:broke
+          $S volume 0.2 sub
+          $S quiet 22:00-09:00
+          $S preset
+          $S list
+          $S off
+          $S
+
+      - name: hook hot path must not block
+        shell: bash
+        env:
+          CLAUDE_SOUNDS_CONFIG: ${{ runner.temp }}/sounds.json
+        run: |
+          python skills/sounds/scripts/sounds.py on
+          start=$(python -c 'import time; print(time.time())')
+          python skills/sounds/scripts/sounds.py hook Stop
+          python - "$start" <<'PY'
+          import sys, time
+          took = time.time() - float(sys.argv[1])
+          print("hook returned in %.0f ms" % (took * 1000))
+          assert took < 2.0, "hook took %.2fs - blocking hooks would stall every turn" % took
+          PY
